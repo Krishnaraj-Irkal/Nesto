@@ -7,7 +7,7 @@ import { getAnalytics } from "firebase/analytics";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyD-i68S6rMLmk2KOJcVtuJ9MxLZDaeqxDY",
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
     authDomain: "crownrealty.firebaseapp.com",
     projectId: "crownrealty",
     storageBucket: "crownrealty.firebasestorage.app",
