@@ -1,9 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { Cloudinary } from '@cloudinary/url-gen';
-import { AdvancedImage } from '@cloudinary/react';
-import { auto } from '@cloudinary/url-gen/actions/resize';
 
 const Profile = () => {
     const { currentUser } = useSelector((state) => state.user);
@@ -21,20 +18,17 @@ const Profile = () => {
 
     const handleFileUpload = async (file) => {
         try {
-            // Step 1: Get the current timestamp
             const timestamp = Math.round(new Date().getTime() / 1000);
 
-            // Step 3: Create FormData to send to Cloudinary
             const formData = new FormData();
             formData.append('file', file);
             formData.append('timestamp', timestamp);
-            formData.append('api_key', import.meta.env.REACT_APP_CLOUDINARY_API_KEY); // From .env file
+            formData.append('api_key', import.meta.env.VITE_CLOUDINARY_API_KEY); // From .env file
 
-            formData.append('upload_preset', import.meta.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
+            formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
 
-            // Step 4: Upload to Cloudinary
             const response = await axios.post(
-                `https://api.cloudinary.com/v1_1/${import.meta.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
+                `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
                 formData,
                 {
                     headers: { 'Content-Type': 'multipart/form-data' },
@@ -46,10 +40,6 @@ const Profile = () => {
                 }
             );
 
-            // Log the successful upload
-            console.log('File uploaded successfully:', response.data);
-
-            // Step 5: Update the avatar URL in formData
             setFormData((prevData) => ({ ...prevData, avatar: response.data.secure_url }));
 
         } catch (error) {
