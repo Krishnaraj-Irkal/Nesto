@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { updateUserStart, updateUserSuccess, updateUserFailure } from '../redux/user/userSlice';
+import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserStart, deleteUserFailure, deleteUserSuccess } from '../redux/user/userSlice';
 
 const Profile = () => {
     const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -66,7 +66,6 @@ const Profile = () => {
                 body: JSON.stringify(formData)
             });
             const data = await res.json();
-            console.log('data', data)
             if (data.success === false) {
                 dispatch(updateUserFailure(data.message));
                 return;
@@ -74,6 +73,23 @@ const Profile = () => {
             dispatch(updateUserSuccess(data));
         } catch (error) {
             dispatch(updateUserFailure(error.message));
+        }
+    }
+
+    const handleDeleteUser = async () => {
+        try {
+            dispatch(deleteUserStart());
+            const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+                method: 'DELETE',
+            })
+            const data = await res.json();
+            if (data.success === false) {
+                dispatch(deleteUserFailure(data.message));
+                return;
+            }
+            dispatch(deleteUserSuccess());
+        } catch (error) {
+            dispatch(deleteUserFailure(error.message))
         }
     }
 
@@ -113,7 +129,7 @@ const Profile = () => {
                 <button disabled={loading} className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80 cursor-pointer">{loading ? 'Loading...' : 'Update'}</button>
             </form>
             <div className='flex justify-between m-5'>
-                <span className="text-red-700 cursor-pointer">Delete account</span>
+                <span className="text-red-700 cursor-pointer" onClick={handleDeleteUser}>Delete account</span>
                 <span className="text-red-700 cursor-pointer">Sign out</span>
 
             </div>
