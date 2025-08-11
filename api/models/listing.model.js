@@ -18,7 +18,7 @@ const listingSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
-        discountedPrice: {
+        discountPrice: {
             type: Number,
             required: true,
         },
@@ -26,7 +26,19 @@ const listingSchema = new mongoose.Schema(
             type: Boolean,
             required: true,
         },
+        bathrooms: {
+            type: Number,
+            required: true,
+        },
+        furnished: {
+            type: Boolean,
+            required: true,
+        },
         parking: {
+            type: String,
+            required: true,
+        },
+        type: {
             type: String,
             required: true,
         },
