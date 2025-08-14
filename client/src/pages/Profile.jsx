@@ -14,7 +14,6 @@ const Profile = () => {
     const dispatch = useDispatch();
     const [showListingError, setShowListingError] = useState(false);
     const [listings, setListings] = useState([]);
-    console.log(listings)
     useEffect(() => {
         if (file) {
             handleFileUpload(file);
