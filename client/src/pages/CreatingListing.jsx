@@ -173,11 +173,11 @@ const CreatingListing = () => {
                     </div>
                     <div className='flex flex-wrap gap-6'>
                         <div className='flex items-center gap-2'>
-                            <input onChange={handleChange} value={formData.bedrooms} className='p-3 border border-gray-300 rounded-lg' type="number" id="bedroom" min='1' max='10' required />
+                            <input onChange={handleChange} value={formData.bedrooms} className='p-3 border border-gray-300 rounded-lg' type="number" id="bedrooms" min='1' max='10' required />
                             <p>Bedrooms</p>
                         </div>
                         <div className='flex items-center gap-2'>
-                            <input onChange={handleChange} value={formData.bathrooms} className='p-3 border border-gray-300 rounded-lg' type="number" id="bathroom" min='1' max='10' required />
+                            <input onChange={handleChange} value={formData.bathrooms} className='p-3 border border-gray-300 rounded-lg' type="number" id="bathrooms" min='1' max='10' required />
                             <p>Bathrooms</p>
                         </div>
                         <div className='flex items-center gap-2'>
