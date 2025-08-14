@@ -118,7 +118,7 @@ const CreatingListing = () => {
             if (+formData.regularPrice < +formData.discountPrice) return setError('Discount Price must be less then Regular Price')
             setLoading(true);
             setError(false);
-            const res = await fetch('api/listing/create', {
+            const res = await fetch('/api/listing/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
