@@ -25,7 +25,6 @@ const Listing = () => {
     const [error, setError] = useState(false);
     const { currentUser } = useSelector((state) => state.user)
     const [contact, setContact] = useState(false);
-    console.log(listing)
     useEffect(() => {
         const fetchListing = async () => {
             try {
