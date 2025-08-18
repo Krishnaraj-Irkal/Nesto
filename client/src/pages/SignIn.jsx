@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
 import OAuth from '../components/OAuth';
+import heroImg from '../assets/signin-image.png';
 
 const SignIn = () => {
     const dispatch = useDispatch();
@@ -39,13 +40,13 @@ const SignIn = () => {
         <main className="bg-[#F8F9FA] min-h-screen">
             <div className="max-w-7xl mx-auto px-4 md:px-8 py-15 lg:py-20">
                 {/* Desktop: 1fr + fixed 480px column; Mobile stacks */}
-                <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_480px] items-center gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_550px] items-center gap-8">
                     {/* Visual panel (matches SignUp) */}
                     <aside
                         className="hidden lg:block relative rounded-2xl overflow-hidden h-[610px]"
                         style={{
                             backgroundImage:
-                                "linear-gradient(135deg, rgba(0,0,0,.45), rgba(0,0,0,.35)), url('/assets/hero.png')",
+                                `linear-gradient(135deg, rgba(0,0,0,.45), rgba(0,0,0,.35)), url(${heroImg})`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                         }}
