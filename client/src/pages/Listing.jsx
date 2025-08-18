@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
@@ -9,99 +9,248 @@ import {
     FaBed,
     FaChair,
     FaMapMarkedAlt,
-    FaMapMarkerAlt,
     FaParking,
     FaShare,
+    FaImages,
 } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import Contact from '../components/Contact';
 
+SwiperCore.use([Navigation]);
+
 const Listing = () => {
-    SwiperCore.use([Navigation]);
-    const params = useParams();
-    const listingId = params.listingId;
-    const [listing, setListing] = useState([])
+    const { listingId } = useParams();
+    const [listing, setListing] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const { currentUser } = useSelector((state) => state.user)
+    const { currentUser } = useSelector((state) => state.user);
     const [contact, setContact] = useState(false);
+    const [copied, setCopied] = useState(false);
+
     useEffect(() => {
         const fetchListing = async () => {
             try {
                 setLoading(true);
-                const res = await fetch(`/api/listing/get/${listingId}`)
+                const res = await fetch(`/api/listing/get/${listingId}`);
                 const data = await res.json();
-                if (data.success === false) {
+                if (data?.success === false) {
                     setError(true);
                     setLoading(false);
                     return;
                 }
                 setListing(data);
                 setLoading(false);
-            } catch (error) {
-                setError(error.message);
-                setLoading(false)
+            } catch (e) {
+                setError(true);
+                setLoading(false);
             }
+        };
+        fetchListing();
+    }, [listingId]);
+
+    const handleShare = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 1500);
+        } catch {
+            alert('Link copied!');
         }
-        fetchListing()
-    }, [listingId])
+    };
+
+    const rupees = (n) =>
+        (typeof n === 'number' ? n : Number(n || 0)).toLocaleString('en-IN');
+
+    if (loading) return <p className="text-center my-7 text-2xl">Loading...</p>;
+    if (error || !listing) return <p className="text-center my-7 text-2xl">Something went wrong!</p>;
+
+    const isRent = listing.type === 'rent';
+    const hasOffer = !!listing.offer;
+    const currentPrice = hasOffer ? listing.discountPrice : listing.regularPrice;
+    const youSave = hasOffer
+        ? Math.max(0, Number(listing.regularPrice) - Number(listing.discountPrice))
+        : 0;
+
     return (
-        <main>
-            {loading && (<p className='text-center my-7 text-2xl'>Loading...</p>)}
-            {error && <p className='text-center my-7 text-2xl'>Something went wrong!</p>}
-            {listing && (
-                <>
-                    <div>
-                        <Swiper navigation>
-                            {listing?.imageUrls?.map((url) => {
-                                return (
-                                    <SwiperSlide key={url}>
-                                        <div className="h-[500px]" style={{ background: `url(${url}) center no-repeat`, backgroundSize: 'cover' }}></div>
-                                    </SwiperSlide>
-                                )
-                            })}
-                        </Swiper>
-                        <div className='flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4'>
-                            <p className='text-2xl font-semibold'>
-                                {listing.name} - ${' '}
-                                {listing.offer
-                                    ? listing.discountPrice.toLocaleString('en-US')
-                                    : listing.regularPrice.toLocaleString('en-US')}
-                                {listing.type === 'rent' && ' / month'}
-                            </p>
-                            <p className="flex items-center mt-6 gap-2 text-slate-600 text-sm">
-                                <FaMapMarkedAlt className="text-green-700" />
+        <main className="bg-white">
+            {/* HERO GALLERY */}
+            <div className="mx-auto">
+                <div className="relative overflow-hidden">
+                    <Swiper navigation className="h-[80vh]">
+                        {listing?.imageUrls?.map((url) => (
+                            <SwiperSlide key={url}>
+                                <div
+                                    className="h-full"
+                                    style={{
+                                        background: `url(${url}) center / cover no-repeat`,
+                                    }}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+
+                    {/* Overlay: share + photo count */}
+                    <div className="absolute bottom-4 right-4 flex items-center gap-3 z-50 ">
+                        <button
+                            onClick={handleShare}
+                            className="bg-white/90 backdrop-blur-md border border-[#E5E7EB] rounded-full px-4 py-2 text-sm font-medium text-[#374151] hover:bg-white transition"
+                            title="Share listing"
+                        >
+                            <span className="inline-flex items-center gap-2">
+                                <FaShare /> {copied ? 'Copied!' : 'Share'}
+                            </span>
+                        </button>
+                        <div className="bg-white/90 backdrop-blur-md border border-[#E5E7EB] rounded-full px-3 py-2 text-xs font-semibold text-[#374151]">
+                            <span className="inline-flex items-center gap-1">
+                                <FaImages /> {listing?.imageUrls?.length || 0} photos
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* CONTENT */}
+            <section className="max-w-7xl mx-auto px-4 pb-8">
+                {/* Pull the content card slightly up for a premium “lifted” look */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8 relative z-10">
+                    {/* LEFT: MAIN DETAILS */}
+                    <div className="lg:col-span-2 space-y-6 bg-white border border-[#E5E7EB] rounded-2xl p-6">
+                        {/* Title + badges */}
+                        <div className="flex flex-wrap items-center justify-between gap-4">
+                            <h1
+                                className="h-heading text-2xl sm:text-3xl md:text-4xl font-bold text-[#1B1B1B] leading-tight
+               flex-1 min-w-0 break-words whitespace-pre-line"
+                            >
+                                {listing.name}
+                            </h1>
+                        </div>
+
+                        {/* Address */}
+                        <p className="flex items-start gap-2 text-[#6B7280] text-sm">
+                            <FaMapMarkedAlt className="mt-0.5 text-[#00C896]" />
+                            <span
+                                className="min-w-0 break-words whitespace-pre-line leading-relaxed"
+                                style={{ overflowWrap: 'anywhere' }}   // extra safety for very long tokens
+                            >
                                 {listing.address}
+                            </span>
+                        </p>
+
+                        {/* Badges */}
+                        <div className="flex flex-wrap gap-3 pt-2">
+                            <span className="inline-block bg-[#1B1B1B] text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                {isRent ? 'For Rent' : 'For Sale'}
+                            </span>
+                            {hasOffer && (
+                                <span className="inline-block bg-[#00C896] text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                    Limited Offer
+                                </span>
+                            )}
+                        </div>
+
+                        {/* Description */}
+                        <div>
+                            <h2 className="h-heading text-xl font-semibold text-[#1B1B1B] mb-2">
+                                Description
+                            </h2>
+                            <p className="text-[#374151] leading-relaxed whitespace-pre-line break-words">
+                                {listing.description}
                             </p>
-                            <div className="flex gap-4">
-                                <p className="bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
-                                    {listing.type === 'rent' ? 'For Rent' : 'For Sale'}
-                                </p>
-                                {listing.offer && (
-                                    <p className="bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
-                                        ${+listing.regularPrice - +listing.discountPrice} OFF
-                                    </p>
-                                )}
-                            </div>
-                            <p className='text-slate-800'>
-                                <span className='font-semibold text-black'>Description - </span>{listing.description}
-                            </p>
-                            <ul className='text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6'>
-                                <li className='flex items-center gap-1 whitespace-nowrap'><FaBed className='text-lg' />{listing.bedrooms > 1 ? `${listing.bedrooms} beds` : `${listing.bedrooms} bed`}</li>
-                                <li className='flex items-center gap-1 whitespace-nowrap'><FaBath className='text-lg' />{listing.bathrooms > 1 ? `${listing.bedrooms} baths` : `${listing.bedrooms} bath`}</li>
-                                <li className='flex items-center gap-1 whitespace-nowrap'><FaParking className='text-lg' />{listing.parking ? "Parking Spot" : 'No Parking'}</li>
-                                <li className='flex items-center gap-1 whitespace-nowrap'><FaChair className='text-lg' />{listing.furnished ? "Furnished" : 'Not Furnished'}</li>
+                        </div>
+
+                        {/* Features */}
+                        <div className="border-t border-[#E5E7EB] pt-6">
+                            <h3 className="h-heading text-xl font-semibold text-[#1B1B1B] mb-4">
+                                Key features
+                            </h3>
+                            <ul className="text-[#374151] font-medium text-sm flex flex-wrap items-center gap-4 sm:gap-6">
+                                <li className="flex items-center gap-2 whitespace-nowrap">
+                                    <FaBed className="text-base text-[#9CA3AF]" />
+                                    {listing.bedrooms} {listing.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
+                                </li>
+                                <li className="flex items-center gap-2 whitespace-nowrap">
+                                    <FaBath className="text-base text-[#9CA3AF]" />
+                                    {listing.bathrooms} {listing.bathrooms > 1 ? 'Bathrooms' : 'Bathroom'}
+                                </li>
+                                <li className="flex items-center gap-2 whitespace-nowrap">
+                                    <FaParking className="text-base text-[#9CA3AF]" />
+                                    {listing.parking ? 'Parking Spot' : 'No Parking'}
+                                </li>
+                                <li className="flex items-center gap-2 whitespace-nowrap">
+                                    <FaChair className="text-base text-[#9CA3AF]" />
+                                    {listing.furnished ? 'Furnished' : 'Not Furnished'}
+                                </li>
                             </ul>
+                        </div>
+
+                        {/* Contact on mobile */}
+                        <div className="lg:hidden pt-2">
                             {currentUser && listing.userRef !== currentUser._id && !contact && (
-                                <button onClick={() => setContact(true)} className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'>Contact landlord</button>
+                                <button
+                                    onClick={() => setContact(true)}
+                                    className="bg-[#1B1B1B] hover:bg-black text-white rounded-lg font-semibold px-5 py-3 transition"
+                                >
+                                    Contact landlord
+                                </button>
                             )}
                             {contact && <Contact listing={listing} />}
                         </div>
                     </div>
-                </>
-            )}
-        </main>
-    )
-}
 
-export default Listing
+                    {/* RIGHT: STICKY PRICE / CTA */}
+                    <aside className="lg:col-span-1">
+                        <div className="lg:sticky lg:top-6 space-y-4">
+                            <div className="bg-white border border-[#E5E7EB] rounded-2xl p-6">
+                                {/* Price */}
+                                <div className="mb-3">
+                                    <div className="flex items-end gap-3">
+                                        <p className="text-2xl sm:text-3xl font-extrabold text-[#1B1B1B]">
+                                            ₹{rupees(currentPrice)}
+                                            {isRent && (
+                                                <span className="text-sm font-medium text-[#6B7280]"> / month</span>
+                                            )}
+                                        </p>
+                                        {hasOffer && (
+                                            <span className="line-through text-[#6B7280]">
+                                                ₹{rupees(listing.regularPrice)}
+                                            </span>
+                                        )}
+                                    </div>
+                                    {hasOffer && youSave > 0 && (
+                                        <div className="mt-2 inline-block bg-[#00C896] text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                            You save ₹{rupees(youSave)}
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* CTA */}
+                                {currentUser && listing.userRef !== currentUser._id && !contact && (
+                                    <button
+                                        onClick={() => setContact(true)}
+                                        className="w-full bg-[#1B1B1B] hover:bg-black text-white rounded-lg font-semibold px-5 py-3 transition"
+                                    >
+                                        Contact landlord
+                                    </button>
+                                )}
+                                {contact && (
+                                    <div className="mt-4">
+                                        <Contact listing={listing} />
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Trust note / helper box */}
+                            <div className="bg-[#F8F9FA] border border-[#E5E7EB] rounded-2xl p-4">
+                                <p className="text-sm text-[#6B7280]">
+                                    Verified listing. Get expert help at every step of renting or buying.
+                                </p>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+        </main>
+    );
+};
+
+export default Listing;
