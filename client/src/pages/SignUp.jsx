@@ -39,7 +39,7 @@ const SignUp = () => {
 
     return (
         <main className="bg-[#F8F9FA] min-h-screen">
-            <div className="max-w-7xl mx-auto px-4 md:px-8 py-15 lg:py-20">
+            <div className="max-w-7xl mx-auto px-4 md:px-8 py-15 lg:py-12">
                 {/* Desktop: 1fr + fixed 480px column; Mobile stacks */}
                 <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_550px] items-center gap-8">
                     {/* Visual panel (matches Sign In) */}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ListingItem from '../components/ListingItem';
+import heroImg from '../assets/searchpage.png';
 
 const Search = () => {
     // Filter state
@@ -102,12 +103,12 @@ const Search = () => {
         <section className="bg-[#F8F9FA]">
             {/* HERO: background image + overlay + heading + form */}
             <div
-                className="relative h-[70vh] bg-cover bg-center"
-                style={{ backgroundImage: "url('/assets/listing-banner.jpg')" }}
+                className="relative h-[100vh] bg-cover bg-center"
+                style={{ backgroundImage: `url(${heroImg})` }}
             >
                 <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40" />
 
-                <div className="relative max-w-7xl mx-auto h-full flex flex-col justify-center pt-20 px-4 space-y-8">
+                <div className="relative max-w-7xl mx-auto h-full flex flex-col justify-end pt-20 px-4 py-10 space-y-8">
                     <h1 className="h-heading text-3xl sm:text-4xl md:text-5xl font-semibold text-white">
                         Explore properties
                     </h1>

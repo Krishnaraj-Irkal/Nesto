@@ -47,7 +47,7 @@ const Home = () => {
         <>
             {/* Hero area */}
             <section
-                className="relative h-[160vh] md:h-[110vh] bg-cover bg-center"
+                className="relative h-[230vh] sm:h-[210vh] md:h-[110vh] bg-cover bg-center"
                 style={{ backgroundImage: `url(${heroImg})` }}
             >
                 {/* Dark gradient overlay */}
