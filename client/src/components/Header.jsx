@@ -73,7 +73,7 @@ export default function Header() {
                             }`}
                         title="Nesto Home"
                     >
-                        <img src="/Nesto White.svg" alt="Nesto Logo" className="h-8 inline-block" />
+                        NESTO
                     </Link>
 
                     {/* Center nav */}
