@@ -116,7 +116,7 @@ const Search = () => {
                     {/* Filter & search form over the image */}
                     <form
                         onSubmit={handleSubmit}
-                        className="bg-white/90 backdrop-blur-md border border-[#E5E7EB] rounded-2xl p-8 space-y-6"
+                        className="bg-white backdrop-blur-md border border-[#E5E7EB] rounded-2xl p-8 space-y-6"
                     >
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {/* Search input */}

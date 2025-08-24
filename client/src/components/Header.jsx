@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { FiUser } from 'react-icons/fi';
 
-const HERO_ROUTES = ['/', '/about-us', '/contact-us', '/search']; // fallback if you forget data-hero
+const HERO_ROUTES = ['/', '/about-us', '/contact-us', '/search'];
 
 export default function Header() {
     const { currentUser } = useSelector((s) => s.user);
@@ -46,7 +46,7 @@ export default function Header() {
     };
 
     return (
-        <header className={`${onHero ? 'absolute top-3' : 'relative mt-3'} left-0 right-0 z-50`}>
+        <header className={`${onHero ? 'absolute top-3' : 'relative mt-3'} left-0 right-0 z-50 mb-2`}>
             <div className="max-w-7xl mx-auto px-3 sm:px-4">
                 <div
                     className={[

@@ -133,7 +133,7 @@ const CreatingListing = () => {
     };
 
     return (
-        <main className="bg-[#F8F9FA] min-h-screen pt-24 md:pt-28">
+        <main className="bg-[#F8F9FA] min-h-screen pt-12">
             <div className="max-w-7xl mx-auto px-4 md:px-8 pb-12">
                 {/* Page heading */}
                 <header className="mb-6">
@@ -294,7 +294,7 @@ const CreatingListing = () => {
                                     id="regularPrice"
                                     type="number"
                                     min="50"
-                                    max="1000000"
+                                    max="1000000000"
                                     required
                                     value={formData.regularPrice}
                                     onChange={handleChange}
@@ -314,7 +314,7 @@ const CreatingListing = () => {
                                         id="discountPrice"
                                         type="number"
                                         min="0"
-                                        max="1000000"
+                                        max="1000000000"
                                         required
                                         value={formData.discountPrice}
                                         onChange={handleChange}

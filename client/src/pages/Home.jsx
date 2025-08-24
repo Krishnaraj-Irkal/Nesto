@@ -78,7 +78,7 @@ const Home = () => {
                         {/* Right side: additional descriptive text about your service */}
                         <div className="lg:w-1/3">
                             <p className="text-white/90 pt-3">
-                                Browse thousands of curated listings across Hubballi and beyond. From cozy
+                                Browse thousands of curated listings across India. From cozy
                                 city apartments to spacious family homes, our platform connects you with the
                                 properties that fit your lifestyle and budget. Our experts guide you through
                                 every step of renting or buying.

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay, Keyboard, Lazy, Thumbs, FreeMode, EffectFade } from 'swiper/modules';
 import 'swiper/css/bundle';
 import {
     FaBath,
@@ -13,7 +13,6 @@ import {
     FaShare,
     FaImages,
 } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
 import Contact from '../components/Contact';
 
 SwiperCore.use([Navigation]);
@@ -23,8 +22,8 @@ const Listing = () => {
     const [listing, setListing] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const { currentUser } = useSelector((state) => state.user);
-    const [contact, setContact] = useState(false);
+    const [active, setActive] = useState(0);
+    const [thumbs, setThumbs] = useState(null);
     const [copied, setCopied] = useState(false);
 
     useEffect(() => {
@@ -38,15 +37,17 @@ const Listing = () => {
                     setLoading(false);
                     return;
                 }
+                console.log(data);
                 setListing(data);
                 setLoading(false);
-            } catch (e) {
-                setError(true);
+            } catch (err) {
+                setError(err);
                 setLoading(false);
             }
         };
         fetchListing();
     }, [listingId]);
+
 
     const handleShare = async () => {
         try {
@@ -58,8 +59,7 @@ const Listing = () => {
         }
     };
 
-    const rupees = (n) =>
-        (typeof n === 'number' ? n : Number(n || 0)).toLocaleString('en-IN');
+    const rupees = (n) => (typeof n === 'number' ? n : Number(n || 0)).toLocaleString('en-IN');
 
     if (loading) return <p className="text-center my-7 text-2xl">Loading...</p>;
     if (error || !listing) return <p className="text-center my-7 text-2xl">Something went wrong!</p>;
@@ -67,9 +67,9 @@ const Listing = () => {
     const isRent = listing.type === 'rent';
     const hasOffer = !!listing.offer;
     const currentPrice = hasOffer ? listing.discountPrice : listing.regularPrice;
-    const youSave = hasOffer
-        ? Math.max(0, Number(listing.regularPrice) - Number(listing.discountPrice))
-        : 0;
+    const youSave = hasOffer ? Math.max(0, Number(listing.regularPrice) - Number(listing.discountPrice)) : 0;
+
+
 
     return (
         <main className="bg-white">
@@ -111,15 +111,14 @@ const Listing = () => {
 
             {/* CONTENT */}
             <section className="max-w-7xl mx-auto px-4 pb-8">
-                {/* Pull the content card slightly up for a premium “lifted” look */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8 relative z-10">
                     {/* LEFT: MAIN DETAILS */}
                     <div className="lg:col-span-2 space-y-6 bg-white border border-[#E5E7EB] rounded-2xl p-6">
-                        {/* Title + badges */}
+                        {/* Title */}
                         <div className="flex flex-wrap items-center justify-between gap-4">
                             <h1
                                 className="h-heading text-2xl sm:text-3xl md:text-4xl font-bold text-[#1B1B1B] leading-tight
-               flex-1 min-w-0 break-words whitespace-pre-line"
+                           flex-1 min-w-0 break-words whitespace-pre-line"
                             >
                                 {listing.name}
                             </h1>
@@ -128,10 +127,7 @@ const Listing = () => {
                         {/* Address */}
                         <p className="flex items-start gap-2 text-[#6B7280] text-sm">
                             <FaMapMarkedAlt className="mt-0.5 text-[#00C896]" />
-                            <span
-                                className="min-w-0 break-words whitespace-pre-line leading-relaxed"
-                                style={{ overflowWrap: 'anywhere' }}   // extra safety for very long tokens
-                            >
+                            <span className="min-w-0 break-words whitespace-pre-line leading-relaxed" style={{ overflowWrap: 'anywhere' }}>
                                 {listing.address}
                             </span>
                         </p>
@@ -150,19 +146,13 @@ const Listing = () => {
 
                         {/* Description */}
                         <div>
-                            <h2 className="h-heading text-xl font-semibold text-[#1B1B1B] mb-2">
-                                Description
-                            </h2>
-                            <p className="text-[#374151] leading-relaxed whitespace-pre-line break-words">
-                                {listing.description}
-                            </p>
+                            <h2 className="h-heading text-xl font-semibold text-[#1B1B1B] mb-2">Description</h2>
+                            <p className="text-[#374151] leading-relaxed whitespace-pre-line break-words">{listing.description}</p>
                         </div>
 
                         {/* Features */}
                         <div className="border-t border-[#E5E7EB] pt-6">
-                            <h3 className="h-heading text-xl font-semibold text-[#1B1B1B] mb-4">
-                                Key features
-                            </h3>
+                            <h3 className="h-heading text-xl font-semibold text-[#1B1B1B] mb-4">Key features</h3>
                             <ul className="text-[#374151] font-medium text-sm flex flex-wrap items-center gap-4 sm:gap-6">
                                 <li className="flex items-center gap-2 whitespace-nowrap">
                                     <FaBed className="text-base text-[#9CA3AF]" />
@@ -183,21 +173,9 @@ const Listing = () => {
                             </ul>
                         </div>
 
-                        {/* Contact on mobile */}
-                        <div className="lg:hidden pt-2">
-                            {currentUser && listing.userRef !== currentUser._id && !contact && (
-                                <button
-                                    onClick={() => setContact(true)}
-                                    className="bg-[#1B1B1B] hover:bg-black text-white rounded-lg font-semibold px-5 py-3 transition"
-                                >
-                                    Contact landlord
-                                </button>
-                            )}
-                            {contact && <Contact listing={listing} />}
-                        </div>
                     </div>
 
-                    {/* RIGHT: STICKY PRICE / CTA */}
+                    {/* RIGHT: STICKY PRICE / CTA + LISTER DETAILS */}
                     <aside className="lg:col-span-1">
                         <div className="lg:sticky lg:top-6 space-y-4">
                             <div className="bg-white border border-[#E5E7EB] rounded-2xl p-6">
@@ -206,14 +184,10 @@ const Listing = () => {
                                     <div className="flex items-end gap-3">
                                         <p className="text-2xl sm:text-3xl font-extrabold text-[#1B1B1B]">
                                             ₹{rupees(currentPrice)}
-                                            {isRent && (
-                                                <span className="text-sm font-medium text-[#6B7280]"> / month</span>
-                                            )}
+                                            {isRent && <span className="text-sm font-medium text-[#6B7280]"> / month</span>}
                                         </p>
                                         {hasOffer && (
-                                            <span className="line-through text-[#6B7280]">
-                                                ₹{rupees(listing.regularPrice)}
-                                            </span>
+                                            <span className="line-through text-[#6B7280]">₹{rupees(listing.regularPrice)}</span>
                                         )}
                                     </div>
                                     {hasOffer && youSave > 0 && (
@@ -222,24 +196,9 @@ const Listing = () => {
                                         </div>
                                     )}
                                 </div>
-
-                                {/* CTA */}
-                                {currentUser && listing.userRef !== currentUser._id && !contact && (
-                                    <button
-                                        onClick={() => setContact(true)}
-                                        className="w-full bg-[#1B1B1B] hover:bg-black text-white rounded-lg font-semibold px-5 py-3 transition"
-                                    >
-                                        Contact landlord
-                                    </button>
-                                )}
-                                {contact && (
-                                    <div className="mt-4">
-                                        <Contact listing={listing} />
-                                    </div>
-                                )}
                             </div>
-
-                            {/* Trust note / helper box */}
+                            <Contact listing={listing} />
+                            {/* Trust note */}
                             <div className="bg-[#F8F9FA] border border-[#E5E7EB] rounded-2xl p-4">
                                 <p className="text-sm text-[#6B7280]">
                                     Verified listing. Get expert help at every step of renting or buying.
