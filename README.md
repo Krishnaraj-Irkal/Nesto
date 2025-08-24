@@ -1,6 +1,6 @@
-# CrownRealty
+# Nesto
 
-CrownRealty is a modern MERN web app for discovering, listing, and managing residential properties for **rent** and **sale**. It combines a clean UI, fast search, and trustworthy details so users can make decisions with confidence.
+Nesto is a modern MERN web app for discovering, listing, and managing residential properties for **rent** and **sale**. It combines a clean UI, fast search, and trustworthy details so users can make decisions with confidence.
 
 ---
 

@@ -3,6 +3,10 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ListingItem from '../components/ListingItem';
 import heroImg from '../assets/hero.png';
+import featuredVilla from '../assets/featured-villa-exterior-hero.jpeg';
+import smallSpace from '../assets/small-space-living-banner.jpeg';
+import livingStyle from '../assets/crownrealty-difference-lifestyle.jpeg';
+import modernKitchen from '../assets/thumb-kitchen.jpeg';
 import Testimonials from '../components/Testimonials';
 
 const Home = () => {
@@ -207,12 +211,12 @@ const Home = () => {
                     {/* Left: slider images */}
                     <div className="relative overflow-hidden rounded-3xl">
                         <img
-                            src="/assets/home-section.jpg"
+                            src={featuredVilla}
                             alt="Featured property"
                             className="w-full h-96 object-cover rounded-3xl"
                         />
                         <div className="absolute bottom-4 left-4 right-4 flex gap-4 overflow-x-auto">
-                            {['/assets/home-section.jpg', '/assets/hero.png', '/assets/home-section.jpg'].map((thumb, idx) => (
+                            {[smallSpace, modernKitchen, livingStyle].map((thumb, idx) => (
                                 <img
                                     key={idx}
                                     src={thumb}
@@ -237,7 +241,7 @@ const Home = () => {
 
                         <div className="bg-[#e9e9e9] rounded-3xl p-8">
                             <h3 className="h-heading text-2xl font-semibold text-[#1B1B1B]">
-                                Discover the CrownRealty difference
+                                Discover the Nesto difference
                             </h3>
                             <p className="text-[#6B7280] mt-4">
                                 Our platform offers advanced search filters, verified listings and expert guidance to help
@@ -289,3 +293,4 @@ const Home = () => {
 };
 
 export default Home;
+

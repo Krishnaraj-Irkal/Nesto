@@ -54,7 +54,7 @@ const SignIn = () => {
                         <div className="absolute inset-0 p-8 lg:p-10 flex flex-col justify-end gap-3">
                             <div className="text-white/90 text-sm">Welcome back</div>
                             <h1 className="text-white text-[34px] leading-[1.15] font-bold">
-                                Sign in to <span className="opacity-90">CrownRealty</span>
+                                Sign in to <span className="opacity-90">Nesto</span>
                             </h1>
                             <p className="text-white/80 max-w-[520px]">
                                 Verified listings, powerful filters, and expert support—pick up where you left off.

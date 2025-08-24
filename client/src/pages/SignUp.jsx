@@ -55,7 +55,7 @@ const SignUp = () => {
                         <div className="absolute inset-0 p-8 lg:p-10 flex flex-col justify-end gap-3">
                             <div className="text-white/90 text-sm">Get started</div>
                             <h1 className="text-white text-[34px] leading-[1.15] font-bold">
-                                Join <span className="opacity-90">CrownRealty</span>
+                                Join <span className="opacity-90">Nesto</span>
                             </h1>
                             <p className="text-white/80 max-w-[520px]">
                                 Create your account to save searches, track price drops, and message owners directly.

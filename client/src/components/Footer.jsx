@@ -12,7 +12,7 @@ export default function Footer() {
                         text-sm font-medium text-[#374151]">
                     {/* Left: brand */}
                     <span className="order-1 h-heading text-xl font-bold">
-                        CrownRealty
+                        <img src="/Nesto Black.svg" alt="Nesto Logo" className="h-8 inline-block" />
                     </span>
 
                     {/* Right: all links */}
@@ -30,7 +30,7 @@ export default function Footer() {
                 <div className="max-w-7xl mx-auto px-4 py-4
                         flex flex-col sm:flex-row justify-between items-center
                         text-xs text-[#6B7280]">
-                    <span>© {year} CrownRealty. All rights reserved.</span>
+                    <span>© {year} Nesto. All rights reserved.</span>
                 </div>
             </div>
         </footer>

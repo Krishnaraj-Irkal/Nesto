@@ -18,7 +18,7 @@ const About = () => {
             <section
                 className="relative h-screen bg-cover bg-center"
                 style={{ backgroundImage: `url(${heroImg})` }} // swap if needed
-                aria-label="About CrownRealty"
+                aria-label="About Nesto"
             >
                 <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40" />
                 <div className="relative max-w-7xl mx-auto h-full flex flex-col justify-end py-10 px-4">
@@ -28,7 +28,7 @@ const About = () => {
                             We make finding a home clear, confident, and human.
                         </h1>
                         <p className="text-white/90 lg:w-1/3">
-                            CrownRealty brings verified listings, sharp search, and expert guidance together so you can move forward
+                            Nesto brings verified listings, sharp search, and expert guidance together so you can move forward
                             with certainty—whether you’re renting or buying.
                         </p>
                     </div>
@@ -131,7 +131,7 @@ const About = () => {
             <section className="py-16 bg-[#F8F9FA]">
                 <div className="max-w-7xl mx-auto px-4">
                     <h2 className="h-heading text-3xl font-semibold text-[#1B1B1B]">
-                        How CrownRealty helps you
+                        How Nesto helps you
                     </h2>
 
                     <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -186,7 +186,7 @@ const About = () => {
 
                     {/* Credibility strip (optional, lightweight & useful for a portfolio) */}
                     <div className="mt-8 bg-white border border-[#E5E7EB] rounded-2xl p-6">
-                        <h3 className="font-semibold text-[#1B1B1B]">Why choose CrownRealty</h3>
+                        <h3 className="font-semibold text-[#1B1B1B]">Why choose Nesto</h3>
                         <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-sm text-[#374151]">
                             <li className="flex items-start gap-2"><FaCheckCircle className="mt-[2px] text-[#00C896]" /> Verified listings & clear pricing</li>
                             <li className="flex items-start gap-2"><FaCheckCircle className="mt-[2px] text-[#00C896]" /> Secure authentication & saved searches</li>

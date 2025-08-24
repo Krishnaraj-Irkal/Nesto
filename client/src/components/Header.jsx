@@ -71,9 +71,9 @@ export default function Header() {
                         to="/"
                         className={`font-semibold text-lg sm:text-2xl tracking-tight ${onHero ? 'text-white' : 'text-[#1B1B1B]'
                             }`}
-                        title="CrownRealty Home"
+                        title="Nesto Home"
                     >
-                        CrownRealty
+                        <img src="/Nesto White.svg" alt="Nesto Logo" className="h-8 inline-block" />
                     </Link>
 
                     {/* Center nav */}

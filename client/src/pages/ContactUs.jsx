@@ -17,8 +17,8 @@ export default function Contact() {
     // Handoff to email client (no API change)
     const handleSubmit = (e) => {
         e.preventDefault();
-        const to = 'hello@crownrealty.com'; // change if needed
-        const subject = encodeURIComponent(`CrownRealty — ${form.subject || 'New enquiry'}`);
+        const to = 'hello@nesto.com'; // change if needed
+        const subject = encodeURIComponent(`Nesto — ${form.subject || 'New enquiry'}`);
         const body = encodeURIComponent(
             `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\n\nMessage:\n${form.message}`
         );
@@ -42,9 +42,9 @@ export default function Contact() {
         {
             icon: <FaEnvelope />,
             title: 'Email',
-            text: 'hello@crownrealty.com',
+            text: 'hello@nesto.com',
             extra: 'We reply within 24 hours',
-            href: 'mailto:hello@crownrealty.com',
+            href: 'mailto:hello@nesto.com',
         },
         {
             icon: <FaClock />,
@@ -75,7 +75,7 @@ export default function Contact() {
             <section
                 className="relative h-[100vh] md:h-[100vh] bg-cover bg-center"
                 style={{ backgroundImage: `url(${heroImg})` }} // provide this image
-                aria-label="Contact CrownRealty"
+                aria-label="Contact Nesto"
             >
                 <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40" />
                 <div className="relative max-w-7xl mx-auto h-full flex items-end px-4 py-10">
@@ -256,7 +256,7 @@ export default function Contact() {
                     <div className="rounded-2xl overflow-hidden border border-[#E5E7EB]">
                         {/* Simple Google Maps embed (Hubballi) */}
                         <iframe
-                            title="CrownRealty Location"
+                            title="Nesto Location"
                             src="https://www.google.com/maps?q=Hubballi%2C%20Karnataka&z=12&output=embed"
                             width="100%"
                             height="380"
