@@ -67,13 +67,12 @@ export default function Header() {
                     }
                 >
                     {/* Brand */}
-                    <Link
-                        to="/"
-                        className={`font-semibold text-lg sm:text-2xl tracking-tight ${onHero ? 'text-white' : 'text-[#1B1B1B]'
-                            }`}
-                        title="Nesto Home"
-                    >
-                        NESTO
+                    <Link to="/" title="Nesto Home" aria-label="Nesto Home">
+                        <img
+                            src={onHero ? '/nesto-logo-text-white.svg' : '/nesto-logo-text-black.svg'}
+                            alt="Nesto Logo"
+                            className="h-7 sm:h-8 w-auto transition"
+                        />
                     </Link>
 
                     {/* Center nav */}
