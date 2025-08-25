@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const listingSchema = new mongoose.Schema(
     {
         name: {
             type: String,
-            required: true,
+            require: true,
         },
         description: {
             type: String,
@@ -22,11 +22,11 @@ const listingSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
-        bathrooms: {
+        bedrooms: {
             type: Number,
             required: true,
         },
-        bedrooms: {
+        bathrooms: {
             type: Number,
             required: true,
         },
@@ -35,7 +35,7 @@ const listingSchema = new mongoose.Schema(
             required: true,
         },
         parking: {
-            type: Boolean,
+            type: String,
             required: true,
         },
         type: {
@@ -54,9 +54,8 @@ const listingSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-    },
-    { timestamps: true }
-);
+    }, { timestamps: true }
+)
 
 const Listing = mongoose.model('Listing', listingSchema);
 
