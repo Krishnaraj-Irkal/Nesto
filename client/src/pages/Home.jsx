@@ -27,10 +27,7 @@ const Home = () => {
         }
         fetchListings();
     }, []);
-
-    // Dummy state for non‑functional fields; feel free to expand later
-    const [price, setPrice] = useState('');
-    const [location, setLocation] = useState('');
+    const [address, setAddress] = useState('');
     const [rooms, setRooms] = useState('');
 
     // Prevent page reload and trigger your existing search handler
@@ -44,6 +41,16 @@ const Home = () => {
         e.preventDefault();
         const params = new URLSearchParams();
         if (searchTerm) params.set('searchTerm', searchTerm);
+        if (address) params.set('address', address);
+        if (rooms) {
+            // Extract number from room string (handles "2 bedrooms", "2 beds", "2bedroom", etc.)
+            const roomNumber = rooms.match(/\d+/);
+
+            if (roomNumber) {
+                const bhkFormat = `${roomNumber[0]}bhk`;
+                params.set('seatchTerm', bhkFormat);
+            }
+        }
         navigate(`/search?${params.toString()}`);
     };
 
@@ -101,7 +108,7 @@ const Home = () => {
                         </h2>
 
                         {/* Input grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             {/* Functional search field */}
                             <div>
                                 <label
@@ -122,22 +129,6 @@ const Home = () => {
                             {/* Non‑functional placeholder fields for UI only */}
                             <div>
                                 <label
-                                    htmlFor="price"
-                                    className="block text-sm font-medium text-[#6B7280] mb-1"
-                                >
-                                    Price
-                                </label>
-                                <input
-                                    id="price"
-                                    type="text"
-                                    placeholder="Price"
-                                    value={price}
-                                    onChange={(e) => setPrice(e.target.value)}
-                                    className="w-full bg-[#F8F9FA] border border-[#E5E7EB] rounded-lg px-3 py-2 text-sm text-[#374151] placeholder-[#6B7280] focus:outline-none focus:border-[#00C896] focus:ring-2 focus:ring-[#00C896]"
-                                />
-                            </div>
-                            <div>
-                                <label
                                     htmlFor="location"
                                     className="block text-sm font-medium text-[#6B7280] mb-1"
                                 >
@@ -147,8 +138,8 @@ const Home = () => {
                                     id="location"
                                     type="text"
                                     placeholder="Location"
-                                    value={location}
-                                    onChange={(e) => setLocation(e.target.value)}
+                                    value={address}
+                                    onChange={(e) => setAddress(e.target.value)}
                                     className="w-full bg-[#F8F9FA] border border-[#E5E7EB] rounded-lg px-3 py-2 text-sm text-[#374151] placeholder-[#6B7280] focus:outline-none focus:border-[#00C896] focus:ring-2 focus:ring-[#00C896]"
                                 />
                             </div>

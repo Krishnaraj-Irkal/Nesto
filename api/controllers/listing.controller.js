@@ -59,6 +59,7 @@ export const getUserListing = async (req, res, next) => {
 }
 
 export const getListings = async (req, res, next) => {
+    console.log(req.query);
     try {
         const limit = parseInt(req.query.limit) || 9;
         const startIndex = parseInt(req.query.startIndex) || 0;
@@ -87,6 +88,7 @@ export const getListings = async (req, res, next) => {
         }
 
         const searchTerm = req.query.searchTerm || '';
+        const address = req.query.address || '';
 
         const sort = req.query.sort || 'createdAt';
 
@@ -98,11 +100,12 @@ export const getListings = async (req, res, next) => {
             furnished,
             parking,
             type,
+            address: { $regex: address, $options: 'i' },
         })
             .sort({ [sort]: order })
             .limit(limit)
             .skip(startIndex);
-
+        console.log
         return res.status(200).json(listings);
     } catch (error) {
         next(error);
