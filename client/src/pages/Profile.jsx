@@ -173,7 +173,7 @@ const Profile = () => {
                                     className="relative h-24 w-24 rounded-full overflow-hidden ring-2 ring-white shadow -mt-10 shrink-0"
                                 >
                                     <img
-                                        src={formData.avatar || currentUser.avatar}
+                                        src={formData.avatar || currentUser.avatar || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'}
                                         alt="profile"
                                         className="h-full w-full object-cover"
                                     />
