@@ -73,7 +73,7 @@ export default function Contact() {
         <main className="bg-white">
             {/* HERO */}
             <section
-                className="relative h-[100vh] md:h-[100vh] bg-cover bg-center"
+                className="relative h-[95vh] md:h-[100vh] bg-cover bg-center"
                 style={{ backgroundImage: `url(${heroImg})` }} // provide this image
                 aria-label="Contact Nesto"
             >

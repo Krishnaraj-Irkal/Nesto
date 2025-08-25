@@ -64,13 +64,13 @@ const Home = () => {
                 {/* Dark gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40" />
 
-                <div className="relative max-w-7xl mx-auto h-full flex flex-col justify-end px-4 pb-16">
+                <div className="relative max-w-7xl mx-auto min-h-screen sm:h-full flex flex-col justify-center sm:justify-end px-4 sm:px-6 py-8 sm:pb-12 md:pb-16">
                     {/* Category chips above the headline */}
-                    <div className="flex flex-wrap gap-3 mb-3">
+                    <div className="flex flex-wrap gap-2 sm:gap-3 mb-3 sm:mb-4">
                         {['House', 'Apartment', 'Residential'].map((cat) => (
                             <button
                                 key={cat}
-                                className="px-4 py-1 bg-white/80 text-[#374151] rounded-full text-sm font-medium shadow-sm hover:bg-white"
+                                className="px-3 py-1 sm:px-4 sm:py-1.5 bg-white/80 text-[#374151] rounded-full text-xs sm:text-sm font-medium shadow-sm hover:bg-white transition-colors"
                             >
                                 {cat}
                             </button>
@@ -78,21 +78,20 @@ const Home = () => {
                     </div>
 
                     {/* Hero text and tagline */}
-                    <div className="flex flex-col lg:flex-row items-start lg:gap-10">
+                    <div className="flex flex-col lg:flex-row items-start lg:gap-10 mb-4 sm:mb-6 md:mb-8 lg:mb-10">
                         {/* Left side: stronger headline and subheading */}
-                        <div className="lg:w-2/3">
-                            <h1 className="text-white text-4xl sm:text-6xl leading-tight">
+                        <div className="lg:w-2/3 mb-3 sm:mb-4 lg:mb-0">
+                            <h1 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight font-bold">
                                 Find Your Dream Home or Perfect Rental
                             </h1>
                         </div>
 
                         {/* Right side: additional descriptive text about your service */}
                         <div className="lg:w-1/3">
-                            <p className="text-white/90 pt-3">
+                            <p className="text-white/90 text-sm sm:text-base leading-relaxed">
                                 Browse thousands of curated listings across India. From cozy
                                 city apartments to spacious family homes, our platform connects you with the
-                                properties that fit your lifestyle and budget. Our experts guide you through
-                                every step of renting or buying.
+                                properties that fit your lifestyle and budget.
                             </p>
                         </div>
                     </div>
@@ -100,20 +99,20 @@ const Home = () => {
                     {/* Search container */}
                     <form
                         onSubmit={onSubmit}
-                        className="mt-10 w-full bg-white bg-opacity-90 backdrop-blur-md border border-[#E5E7EB] rounded-2xl shadow-xl p-6 space-y-6"
+                        className="w-full bg-white bg-opacity-90 backdrop-blur-md border border-[#E5E7EB] rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 space-y-4 sm:space-y-6"
                     >
                         {/* Headline for the search form */}
-                        <h2 className="text-xl font-semibold text-[#1B1B1B]">
+                        <h2 className="text-lg sm:text-xl font-semibold text-[#1B1B1B]">
                             Find the best place
                         </h2>
 
                         {/* Input grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                             {/* Functional search field */}
-                            <div>
+                            <div className="sm:col-span-2 lg:col-span-1">
                                 <label
                                     htmlFor="property-type"
-                                    className="block text-sm font-medium text-[#6B7280] mb-1"
+                                    className="block text-xs sm:text-sm font-medium text-[#6B7280] mb-1"
                                 >
                                     Looking for
                                 </label>
@@ -123,14 +122,14 @@ const Home = () => {
                                     placeholder="Enter type"
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="w-full bg-[#F8F9FA] border border-[#E5E7EB] rounded-lg px-3 py-2 text-sm text-[#374151] placeholder-[#6B7280] focus:outline-none focus:border-[#00C896] focus:ring-2 focus:ring-[#00C896]"
+                                    className="w-full bg-[#F8F9FA] border border-[#E5E7EB] rounded-lg px-3 py-2.5 sm:py-2 text-sm text-[#374151] placeholder-[#6B7280] focus:outline-none focus:border-[#00C896] focus:ring-2 focus:ring-[#00C896]/20"
                                 />
                             </div>
                             {/* Non‑functional placeholder fields for UI only */}
                             <div>
                                 <label
                                     htmlFor="location"
-                                    className="block text-sm font-medium text-[#6B7280] mb-1"
+                                    className="block text-xs sm:text-sm font-medium text-[#6B7280] mb-1"
                                 >
                                     Locations
                                 </label>
@@ -140,13 +139,13 @@ const Home = () => {
                                     placeholder="Location"
                                     value={address}
                                     onChange={(e) => setAddress(e.target.value)}
-                                    className="w-full bg-[#F8F9FA] border border-[#E5E7EB] rounded-lg px-3 py-2 text-sm text-[#374151] placeholder-[#6B7280] focus:outline-none focus:border-[#00C896] focus:ring-2 focus:ring-[#00C896]"
+                                    className="w-full bg-[#F8F9FA] border border-[#E5E7EB] rounded-lg px-3 py-2.5 sm:py-2 text-sm text-[#374151] placeholder-[#6B7280] focus:outline-none focus:border-[#00C896] focus:ring-2 focus:ring-[#00C896]/20"
                                 />
                             </div>
                             <div>
                                 <label
                                     htmlFor="rooms"
-                                    className="block text-sm font-medium text-[#6B7280] mb-1"
+                                    className="block text-xs sm:text-sm font-medium text-[#6B7280] mb-1"
                                 >
                                     Number of rooms
                                 </label>
@@ -156,16 +155,16 @@ const Home = () => {
                                     placeholder="2 Bed rooms"
                                     value={rooms}
                                     onChange={(e) => setRooms(e.target.value)}
-                                    className="w-full bg-[#F8F9FA] border border-[#E5E7EB] rounded-lg px-3 py-2 text-sm text-[#374151] placeholder-[#6B7280] focus:outline-none focus:border-[#00C896] focus:ring-2 focus:ring-[#00C896]"
+                                    className="w-full bg-[#F8F9FA] border border-[#E5E7EB] rounded-lg px-3 py-2.5 sm:py-2 text-sm text-[#374151] placeholder-[#6B7280] focus:outline-none focus:border-[#00C896] focus:ring-2 focus:ring-[#00C896]/20"
                                 />
                             </div>
                         </div>
 
-                        {/* Filter chips row */}
-                        <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                        {/* Search button */}
+                        <div className="flex justify-center">
                             <button
                                 type="submit"
-                                className="bg-[#1B1B1B] hover:bg-black text-white px-6 py-3 rounded-full text-sm font-semibold transition-transform duration-150 hover:-translate-y-[2px]"
+                                className="w-full sm:w-auto bg-[#1B1B1B] hover:bg-black text-white px-6 sm:px-8 py-3 sm:py-3.5 rounded-full text-sm font-semibold transition-all duration-200 hover:-translate-y-[1px] active:translate-y-0"
                             >
                                 Search Properties
                             </button>
