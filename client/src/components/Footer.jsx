@@ -18,9 +18,9 @@ export default function Footer() {
                     {/* Right: all links */}
                     <nav className="order-2 md:ml-auto flex flex-wrap gap-6">
                         <Link to="/" className="hover:text-[#00C896]">Home</Link>
-                        <Link to="/about" className="hover:text-[#00C896]">About</Link>
+                        <Link to="/about-us" className="hover:text-[#00C896]">About</Link>
                         <Link to="/search" className="hover:text-[#00C896]">Properties</Link>
-                        <Link to="/contact" className="hover:text-[#00C896]">Contact</Link>
+                        <Link to="/contact-us" className="hover:text-[#00C896]">Contact</Link>
                     </nav>
                 </div>
             </div>

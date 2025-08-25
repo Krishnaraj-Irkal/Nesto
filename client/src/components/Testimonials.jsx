@@ -39,11 +39,19 @@ export default function Testimonials() {
                 {/* Content grid */}
                 <div className="relative mt-12 flex flex-col md:flex-row gap-5">
                     {/* Left: portrait (defines the height) */}
-                    <div className="rounded-3xl overflow-hidden aspect-square w-[260px] sm:w-[320px] md:w-[380px] md:ml-[100px] flex-shrink-0">
+                    <div className="rounded-3xl not-md:hidden overflow-hidden aspect-square w-[260px] sm:w-[320px] md:w-[380px] md:ml-[100px] flex-shrink-0">
                         <img
                             src={active.avatar}
                             alt={active.name}
                             className="w-full h-full object-cover"
+                        />
+                    </div>
+
+                    <div className="md:hidden absolute -top-10 left-1/2 -translate-x-1/2">
+                        <img
+                            src={active.avatar}
+                            alt={active.name}
+                            className="h-20 w-20 rounded-2xl object-cover ring-4 ring-white shadow-md"
                         />
                     </div>
 

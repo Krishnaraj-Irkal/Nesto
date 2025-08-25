@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
-import { Navigation, Pagination, Autoplay, Keyboard, Lazy, Thumbs, FreeMode, EffectFade } from 'swiper/modules';
+import { Navigation, } from 'swiper/modules';
 import 'swiper/css/bundle';
 import {
     FaBath,
@@ -22,8 +22,7 @@ const Listing = () => {
     const [listing, setListing] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const [active, setActive] = useState(0);
-    const [thumbs, setThumbs] = useState(null);
+
     const [copied, setCopied] = useState(false);
 
     useEffect(() => {
@@ -76,7 +75,7 @@ const Listing = () => {
             {/* HERO GALLERY */}
             <div className="mx-auto">
                 <div className="relative overflow-hidden">
-                    <Swiper navigation className="h-[80vh]">
+                    <Swiper navigation className="md:h-[80vh] h-[40vh]">
                         {listing?.imageUrls?.map((url) => (
                             <SwiperSlide key={url}>
                                 <div

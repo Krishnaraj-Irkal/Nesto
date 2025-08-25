@@ -103,7 +103,7 @@ const Search = () => {
         <section className="bg-[#F8F9FA]">
             {/* HERO: background image + overlay + heading + form */}
             <div
-                className="relative h-[100vh] bg-cover bg-center"
+                className="relative h-[120vh] bg-cover bg-center"
                 style={{ backgroundImage: `url(${heroImg})` }}
             >
                 <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40" />

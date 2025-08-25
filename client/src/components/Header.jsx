@@ -71,7 +71,7 @@ export default function Header() {
                         <img
                             src={onHero ? '/nesto-logo-text-white.svg' : '/nesto-logo-text-black.svg'}
                             alt="Nesto Logo"
-                            className="h-7 sm:h-8 w-auto transition"
+                            className="h-4 w-auto transition"
                         />
                     </Link>
 
