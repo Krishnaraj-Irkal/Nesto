@@ -36,7 +36,6 @@ const Listing = () => {
                     setLoading(false);
                     return;
                 }
-                console.log(data);
                 setListing(data);
                 setLoading(false);
             } catch (err) {

@@ -5,10 +5,8 @@ import testimonials from '../assets/testimonials';
 
 export default function Testimonials() {
     const items = useMemo(() => testimonials ?? [], []);
-    console.log(items)
     const [idx, setIdx] = useState(0);
     const active = items[idx] ?? {};
-    const gridRef = useRef(null);
 
     const next = () => setIdx((i) => (i + 1) % items.length);
     const prev = () => setIdx((i) => (i - 1 + items.length) % items.length);
